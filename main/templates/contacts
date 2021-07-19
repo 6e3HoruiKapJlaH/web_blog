@@ -1,47 +1,37 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %} { % block title % }Contacts { % endblock % } {% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static './css/style.css' %}">
-    <title>Contacts</title>
-</head>
+<div class="block">
+    <!--  flex-container  -->
+    <div class="block__row">
+        <!--  flex-element  -->
+        <div class="block__element block__element_1">
+            <div class="block_content">
 
-<body>
-    <header class="header">
-        <!--Animation of header-->
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+                <!--  content  -->
+                <section>
+                    <img src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg" alt="img_1">
+                </section>
 
-        <div class="wrapper">
-            <!-- Site name-->
-            <div class="header_logo">
-                <a href="#">Personal Blog</a>
+                <aside>
+                    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                    <p>
+                        <div class="block__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum qui mollitia hic, nam quo, repellendus blanditiis doloremque alias unde, praesentium accusamus ratione aspernatur. Rem eius molestiae illo placeat nisi sequi!</div>
+                    </p>
+                    <p>
+                        <div class="block__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum qui mollitia hic, nam quo, repellendus blanditiis doloremque alias unde, praesentium accusamus ratione aspernatur. Rem eius molestiae illo placeat nisi sequi!</div>
+                    </p>
+                    <div class="see_more">
+                        <a href="#">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span> See more...
+                        </a>
+                    </div>
+                </aside>
             </div>
-            <nav>
-                <!--Header menu-->
-                <ul class="main_nav">
-                    <li class="current"><a href="#">Journal</a></li>
-                    <li class="current"><a href="#">About</a></li>
-                    <li class="current"><a href="#">Work</a></li>
-                    <li class="current"><a href="./contacts">Contact</a></li>
-                </ul>
-            </nav>
+
         </div>
-    </header>
-    <!-- Header End -->
-
-    <p>
-        Контакты
-    </p>
-    <section>
-        <img src="https://images.pexels.com/photos/3078831/pexels-photo-3078831.jpeg" alt="img_2">
-    </section>
-</body>
-
-</html>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+    <title>{% block title %} Document {% endblock%}</title>
+</head>
+
+<body>
+    <header class="header">
+        <!--Animation of header-->
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <div class="wrapper">
+            <!-- Site name-->
+            <div class="header_logo">
+                <a href="#">Personal Blog</a>
+            </div>
+            <nav>
+                <!--Header menu-->
+                <ul class="main_nav">
+                    <li class="current"><a href="#">Journal</a></li>
+                    <li class="current"><a href="#">About</a></li>
+                    <li class="current"><a href="#">Work</a></li>
+                    <li class="current"><a href="./contacts">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    {% block content %} {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</body>
+
+</html>
