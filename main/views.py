@@ -19,6 +19,6 @@ def see_more(request, article_id):
         a = Article.objects.get(id=article_id)
     except:
         raise Http404("Статьи нет, полудурок")
-    return (render(request, 'article.html'))
+    return (render(request, 'article.html', {'article' : a}))
 
 
