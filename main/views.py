@@ -8,4 +8,4 @@ def index(request):
 
 
 def contacts(request):
-     return(render(request, 'contacts'))
+     return(render(request, 'contacts.html'))
