@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{ % block title % } {{article.title}} { % endblock % }
+
+{% block content %}
+
+<div class="block">
+    <!--  flex-container  -->
+    <div class="block__row">
+ 
+        <h1>{{article.title}}</h1>
+    
+        <br>
+        <img src={{article.img_url}} alt="img_3">                
+        <br>
+
+        <p>
+            <div class="block__content">{{article.text}}</div>
+        </p>
+                        
+    </div>
+       
+</div>
+
+
+{% endblock %}

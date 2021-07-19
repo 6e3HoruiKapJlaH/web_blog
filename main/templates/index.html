@@ -1,4 +1,12 @@
-{% extends 'base.html' %} { % block title % }Personal blog { % endblock % } {% block content %}
+{% extends 'base.html' %} 
+
+
+
+{ % block title % }Personal blog { % endblock % }
+
+
+
+{% block content %}
 
 <div class="block">
     <!--  flex-container  -->
@@ -9,7 +17,7 @@
     
                 <!--  flex-element  -->
 
-                <div class="block__element ">
+                <div class="block__element">
                     <div class="block_content">
 
                         <section>
@@ -23,7 +31,7 @@
                             </p>
 
                             <div class="see_more">
-                                <a href="#">
+                                <a href="{% url 'see_more' a.id %}">
                                     <span></span>
                                     <span></span>
                                     <span></span>
