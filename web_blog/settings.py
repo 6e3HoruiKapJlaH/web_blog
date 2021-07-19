@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'main',
+    #'contacts',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +66,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), 'temlates')
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
