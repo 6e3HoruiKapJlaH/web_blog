@@ -7,18 +7,20 @@
 <div class="block">
     <!--  flex-container  -->
     <div class="block__row">
+        <div class="block__element">
  
-        <h1>{{article.title}}</h1>
+            <h1>{{article.title}}</h1>
+        
+            <img src={{article.img_url}} alt="img_3" >                
     
-        <br>
-        <img src={{article.img_url}} alt="img_3">                
-        <br>
-
-        <p>
-            <div class="block__content">{{article.text}}</div>
-        </p>
-                        
+            <p>
+                <div class="block__content">{{article.text}} </div>
+            </p>
+                            
+        </div>
+           
     </div>
+        
        
 </div>
 
