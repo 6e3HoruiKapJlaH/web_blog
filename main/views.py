@@ -11,16 +11,21 @@ def clear_to_500_symb(article_list):
     return article_list    
 
 def index(request):
-    articles_list =clear_to_500_symb( Article.objects.order_by('title')[:3])
+    articles_list = clear_to_500_symb( Article.objects.order_by('title')[:3])
     
     return (render(request, 'index.html', {'articles_list': articles_list}))
 
 
 def index_list(request, list_id):
-    len_list = Article.objects.count()/3
-    articles_list = clear_to_500_symb(Article.objects.order_by('title')[3 * list_id:3 * (list_id + 1)])
-    
-    return (render(request, 'index.html', {'articles_list': articles_list, 'list_id': list_id, 'back_id': list_id - 1,
+    if list_id <= 0:
+        raise Http404("Страницы нет, полудурок, уходи отсюда")
+    elif Article.objects.order_by('title')[3 * (list_id - 1):3 * list_id].count() == 0:
+        raise Http404("Страницы нет, полудурок, уходи отсюда")
+    else:
+        len_list = Article.objects.count() / 3
+        articles_list = clear_to_500_symb(Article.objects.order_by('-title')[3 * (list_id - 1):3 * list_id])
+        return (
+            render(request, 'index.html', {'articles_list': articles_list, 'list_id': list_id, 'back_id': list_id - 1,
                                            'next_id': list_id + 1, 'len_list': len_list}))
 
 
