@@ -46,9 +46,9 @@
                 {% endfor %}
             {% endif %}
 
-            {% if list_id %}<!--  Если нет id у списка статей (первая страница), то и кнопки "назад" нет  -->
+            {% if list_id and back_id != 0%}<!--  Если нет id у списка статей (первая страница), то и кнопки "назад" нет  -->
                 <div class="see_more">
-                    {% if back_id == 0 %}
+                    {% if back_id == 1 %}
                         <!--Если предыдущая страница первая, то ссылка на основную страницу, иначе - работаем как обычно-->
                         <a href="/">
                     {% else %}
@@ -62,11 +62,12 @@
                     </a>
                 </div>
             {% endif %}
-            {% if next_id < len_list or not list_id %}
+            {% if list_id < len_list or not list_id %}
                 <!--Если текущий id страницы меньше количества страниц со списками и если нет текущего id (первая страница)-->
                 <div class="see_more">
-                    {% if not list_id %} <!--Если нет id у списка статей (первая страница)-->
-                        <a href="/articles_list/1">
+                    {% if not list_id or articles_list.count > 3 %}
+                        <!--Если нет id у списка статей (первая страница)-->
+                        <a href="/articles_list/2">
                     {% else %} <!--  Если же страница не первая  -->
                         <a href="/articles_list/{{ next_id }}">
                     {% endif %}
