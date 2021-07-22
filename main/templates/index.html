@@ -46,10 +46,9 @@
                 {% endfor %}
             {% endif %}
 
-            <div class="block__element">
-                <div class="block_content">
-                    <section>
-
+            <div class="block__arrows">
+                <div class="block_back">
+                
             {% if list_id and back_id != 0 %}<!--  Если нет id у списка статей (первая страница), то и кнопки "назад" нет  -->
                 <div class="see_more">
                     {% if back_id == 1 %}
@@ -66,10 +65,12 @@
                     </a>
                 </div>
       
-
+            
             {% endif %}
-        </section>
-            <aside>
+        </div>
+
+
+            <div class="block_next">
 
             {% if list_id < len_list or not list_id %}
                 <!--Если текущий id страницы меньше количества страниц со списками и если нет текущего id (первая страница)-->

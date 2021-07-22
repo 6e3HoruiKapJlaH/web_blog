@@ -112,7 +112,7 @@ img {
 /* flex-контейнер */
 .block__row{
 
-    border: 10px solid  #fff /*#ece89d*/;
+border: 10px solid  #fff /*#ece89d*/;
 display:flex;
 flex-direction:column;
 height: 100%;
@@ -127,15 +127,15 @@ justify-content: space-between;
 .block__element{
     margin-left: auto;
     margin-right: auto;
-max-width: 900px;
+width: 900px;
 
 border: 5px solid #5e5373;
 padding: 20px;
 }
 
 .block__element h1, p{
-    margin-left: 15px;
-    display: block;
+    margin-left: 0px;
+    display: flex;
     margin: 2px 0 0 0;
 }
 section {
@@ -144,32 +144,41 @@ section {
   }
   aside {
     float: right;
-    width: 63%;
+    width: 65%;
   }
 
   a{
   text-decoration: none;
 }
   
-/* flex-элемент №1 */
-.block__element_1{
-    margin-top: auto;
-    margin-bottom: auto;
+
+
+
+.block__arrows{
+    margin-left: auto;
+    margin-right: auto;
+max-width: 900px;
+
+border: 5px solid #5e5373;
+padding: 20px;
 }
-.block__element_1 img{
-/*margin-top: auto;
-margin-bottom: auto;
-    max-width: 100%;
-    display: flex;
-    object-fit: cover;*/
+
+.block_back{
+    float: left;
+    width: 50%;
+}
+
+.block_next{
+    float: right;
+    width: 50%;
 }
 
 
 /* Animation of buttonSEE MORE... */
 .see_more {
-    margin: 20px 0 0 0;
+    margin: 0px 0 0 0;
     padding: 0;
-    display: flex;
+    display: block;
     justify-content: left;
     align-items: center;
     font-family: consolas;
@@ -252,15 +261,6 @@ margin-bottom: auto;
     transition-delay: 0.75s;
 }
 /*End of Animation*/
-
-
-
-/* flex-элемент №2 */
-.block__el img{
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
-}
 
 
 
