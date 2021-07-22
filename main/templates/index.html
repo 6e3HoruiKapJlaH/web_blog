@@ -1,5 +1,4 @@
-{% extends 'base.html' %} 
-
+{% extends 'base.html' %}
 
 
 { % block title % }Personal blog { % endblock % }
@@ -8,63 +7,92 @@
 
 {% block content %}
 
-<div class="block">
-    <!--  flex-container  -->
-    <div class="block__row">
- 
-        {% if articles_list%}
-            {%for a in articles_list%}
-    
-                <!--  flex-element  -->
+    <div class="block">
+        <!--  flex-container  -->
+        <div class="block__row">
 
-                <div class="block__element">
-                    <div class="block__content">
+            {% if articles_list %}
+                {% for a in articles_list %}
 
-                        <section>
-                            <img src={{a.img_url}} alt="img_3">
-                        </section>
+                    <!--  flex-element  -->
 
-                        <aside>
-                            <h1>{{a.title}}</h1>
-                            <p>
-                                <div class="block__content">{{a.text}}</div>
-                            </p>
+                    <div class="block__element">
+                        <div class="block_content">
 
-                            <div class="see_more">
-                                <a href="{% url 'see_more' a.id %}">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span> See more...
-                                </a>
-                            </div>
-                        </aside>
-                        
+                            <section>
+                                <img src={{ a.img_url }} alt="img_3">
+                            </section>
+
+                            <aside>
+                                <h1>{{ a.title }}</h1>
+                                <p>
+                                <div class="block__content">{{ a.text }}</div>
+                                </p>
+
+                                <div class="see_more">
+                                    <a href="{% url 'see_more' a.id %}">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span> See more...
+                                    </a>
+                                </div>
+                            </aside>
+
+                        </div>
                     </div>
+                    <br>
+
+                {% endfor %}
+            {% endif %}
+
+            <div class="block__element">
+                <div class="block_content">
+                    <section>
+
+            {% if list_id %}<!--  Если нет id у списка статей (первая страница), то и кнопки "назад" нет  -->
+                <div class="see_more">
+                    {% if back_id == 0 %}
+                        <!--Если предыдущая страница первая, то ссылка на основную страницу, иначе - работаем как обычно-->
+                        <a href="/">
+                    {% else %}
+                        <a href="/articles_list/{{ back_id }}">
+                    {% endif %}
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span> ⟵
+                    </a>
                 </div>
-                <br>
-       
-            {% endfor%}
-        {% endif%}
+      
 
-        <div class="see_more">
-            <a href="#">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span> Pervious...
-            </a>
+            {% endif %}
+        </section>
+            <aside>
+
+            {% if next_id < len_list or not list_id %}
+                <!--Если текущий id страницы меньше количества страниц со списками и если нет текущего id (первая страница)-->
+                <div class="see_more">
+                    {% if not list_id %} <!--Если нет id у списка статей (первая страница)-->
+                        <a href="/articles_list/1">
+                    {% else %} <!--  Если же страница не первая  -->
+                        <a href="/articles_list/{{ next_id }}">
+                    {% endif %}
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span> ⟶
+                    </a>
+                </div>
+            {% endif %}
+            </aside>
+
         </div>
-        <div class="see_more">
-            <a href="#">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span> Next...
-            </a>
+
+            </div>
         </div>
+
+
     </div>
-
-
-</div>
 {% endblock %}
