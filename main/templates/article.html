@@ -53,7 +53,64 @@
             <p>
                 <div class="block__content">{{article.text}} </div>
             </p>
-                            
+            <br>
+
+
+
+            <h2>Comments to this article:</h2>
+        
+            <form action="/leave-comment/" method="post" enctype="multipart/form-data">
+
+                <div>
+                    <p>Enter username:</p>
+                    <input id = "username" name="username" type="text" maxlength="50">
+                </div>
+
+                <div>
+                    <p>Leave a comment:</p>
+                    <textarea name="comment_text" maxlength="350" cols="30" rows="6"></textarea>
+                </div>
+
+                <div>
+                    <p>Select your avatar</p>
+				    <input type="file" name="avatar" accept=".jpg, .jpeg, .png">
+                </div>
+                <br>
+                <div>
+                    <button type="submit">Leave a comment</button>
+                    <button type="reset">Cancel</button>
+                </div>
+            </form>
+            
+
+            <br>            
+            <br>
+            <div class="comment">
+
+                <section>
+                <div class="comment_right">
+                    <div class="avatar">
+                        <img src=https://upload.wikimedia.org/wikipedia/commons/b/b4/Wikipe-tan_avatar.png alt="img" >    
+                    </div>
+                </div>
+
+                </section>
+
+                <aside>
+                    <div class="comment_right">
+                        <div class="username">
+                            <h3>test_comment</h3>
+                        </div>
+
+                        <p>
+                            <div class="comment_text">
+                                Авата́р, авата́ра (просторечн. а́ва, авата́рк </div>
+                            </div>
+                        </p>
+                    </div>
+                </aside>
+
+            </div>
         </div>
            
     </div>

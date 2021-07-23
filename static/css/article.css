@@ -145,7 +145,7 @@
     margin: 2px 0 0 0;
 }
 
-img {
+.image img {
     max-width: 100%;
     display: block;
     margin: auto;
@@ -155,12 +155,14 @@ img {
 
 section {
     float: left;
-    width: 35%;
+    width: 15%;
 }
 
 aside {
-    float: right;
-    width: 63%;
+    float: left;
+    width: 85%;
+    padding: -5px 0px 0px;
+    margin: 0px -15px;
 }
 
 a {
@@ -168,19 +170,28 @@ a {
 }
 
 
-/* flex-элемент №1 */
-
-.block__element_1 {
-    margin-top: auto;
-    margin-bottom: auto;
+/*.comment{
+    margin: 0px -15px;
 }
 
-.block__element_1 img {
-    /*margin-top: auto;
-margin-bottom: auto;
+.comment_left{
+    flex: 0 0 25%
+}
+
+.comment_right{
+    flex: 0 0 75%
+}*/
+/*.avatar{
+    padding: 25px 0 0;
+
+}*/
+.avatar img{
     max-width: 100%;
-    display: flex;
-    object-fit: cover;*/
+  height: auto;
+  max-height: 100%;
+    border-radius: 100%; 
+    box-shadow: 0 0 7px #666;
+    
 }
 
 
@@ -290,27 +301,6 @@ margin-bottom: auto;
 
 /*End of Animation*/
 
-
-/* flex-элемент №2 */
-
-.block__element_2 {}
-
-.block__element_2 img {
-    /*max-width: 100%;
-    display: flex;*/
-}
-
-
-/* flex-элемент №3 */
-
-.block__element_3 {}
-
-.block__element_3 img {
-    /*object-fit: cover;
-    /*max-width: 100%;
-    display: flex;
-    object-fit: cover;*/
-}
 
 
 /* контент */
