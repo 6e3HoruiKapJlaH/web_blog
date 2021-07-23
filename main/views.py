@@ -1,15 +1,62 @@
 from django.shortcuts import render
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
+from django.urls import reverse
 
-from .models import Article
+from .models import Article, Comment
 
+
+def check_article(article_id):
+    try:
+        current_aticle = Article.objects.get(id=article_id)
+
+        return current_aticle
+    except:
+        raise Http404("Статьи нет, полудурок")
+    
 
 def cut_to_500_symb(article_list):
     for a in article_list:
         a.text = a.text[:500] 
     return article_list    
 
+
+def leave_comment(request, article_id):
+    try:
+        current_aticle = Article.objects.get(id=article_id)
+
+    except:
+        raise Http404("Статьи нет, полудурок")
+
+
+    #if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        #form = Comment(request.POST, request.FILES)
+        # check whether it's valid:
+        #if form.is_valid():
+        #username = request.POST['username']
+        #img = request.POST['avatar']
+        #text = request.POST['comment_text']
+        #obj = Comment.objects.create(
+                                 #text = text,
+                                 #username = username,
+                                 #avatar = img
+                                 #)
+        #obj.save()
+
+    current_aticle.comment_set.create(
+                username = request.POST['username'], 
+                text = request.POST['comment_text'],
+                avatar = request.POST['image'] )
+        #print(obj)
+
+    see_more(request, article_id)
+
+    # if a GET (or any other method) we'll create a blank form
+    '''else:
+        form = Comment()
+
+    return render(request, 'article.html', {'form': form})'''
 
 def index(request):
     articles_list = cut_to_500_symb( Article.objects.order_by('title')[:3])
@@ -53,12 +100,11 @@ def contacts(request):
 
 
 def see_more(request, article_id):
-    try:
-        current_aticle = Article.objects.get(id=article_id)
-    except:
-        raise Http404("Статьи нет, полудурок")
-    
+    current_aticle = check_article(article_id)
+    comments_to_this_article = current_aticle.comment_set.order_by('id')
+
     articles_dict = dict([
-         ('article', current_aticle)
+         ('article', current_aticle),
+         ('comments', comments_to_this_article)
          ])
     return (render(request, 'article.html', articles_dict))
