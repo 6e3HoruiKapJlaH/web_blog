@@ -22,7 +22,6 @@ def cut_to_500_symb(article_list):
     return article_list
 
 
-
 def leave_comment(request, article_id):
     context = {}
 
@@ -50,9 +49,10 @@ def leave_comment(request, article_id):
 
     else:
         form = CommentForm()
-    context['form']= form
+    context['form'] = form
 
     return (see_more(request, article_id))
+
 
 
 def index(request):
