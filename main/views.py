@@ -1,3 +1,4 @@
+# ЗАКОНЧИТЬ ДОКАТЬ
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
@@ -7,55 +8,61 @@ from .models import Article, Comment
 from .forms import CommentForm
 
 
+#Проверка существования статьи
 def check_article(article_id):
     try:
         current_article = Article.objects.get(id=article_id)
 
         return current_article
+
     except:
+        #Вибрасываем ошибку если статья не найдена
         raise Http404("Статьи нет, полудурок")
 
 
-def cut_to_500_symb(article_list):
+#Уразаем текст статей до 500 символов
+def cut_to_500_symb(article_list): 
     for a in article_list:
         a.text = a.text[:500]
     return article_list
 
-
+#Функция для оставления комментариев под статьей
 def leave_comment(request, article_id):
-    context = {}
 
     if request.method == "POST":
 
-        # create a form instance and populate it with data from the request:
+        # Создание формы с приемом состояний
         form = CommentForm(request.POST, request.FILES)
-        # check whether it's valid:
+        # Проверка правильности заполнения формы
         if form.is_valid():
 
+            # Создание экземпяра класса комментарий 
             obj = check_article(article_id)
 
+            # Заполнения полей класса
             name = form.cleaned_data.get("nickname")
             text = form.cleaned_data.get("text")
             img = form.cleaned_data.get("avatar")
+
+            # Заполнения экземпляра класса
             obj.comment_set.create(
                                  username = name,
                                  text = text,
                                  avatar = img
                                  )
+            # Сохранение изменений 
             obj.save()
-            print(obj)
-            see_more(request, article_id)
-
 
     else:
         form = CommentForm()
-    context['form'] = form
-
+    
+    # Возврат на страницу со статьей 
     return (see_more(request, article_id))
 
 
-
+# ДОБАВИТЬ ВНУТРЬ INDEX_LIST
 def index(request):
+    # 
     articles_list = cut_to_500_symb(Article.objects.order_by('title')[:3])
 
     articles_dict = dict([
@@ -74,7 +81,7 @@ def index_list(request, list_id):
     elif current_3_articles.count() == 0:
         raise Http404("Страницы нет, полудурок, уходи отсюда")
     else:
-        # -------------------------------------------------------------------------------------
+        # ____________________________________________________________________________________
         len_list = Article.objects.count() / 3
 
         first_article_id = 3 * (list_id - 1)
@@ -94,10 +101,12 @@ def index_list(request, list_id):
         return render(request, 'index.html', articles_dict)
 
 
+# Выводим страницу с контактами
 def contacts(request):
     return render(request, 'contacts.html')
 
 
+# Вывод одной статьи 
 def see_more(request, article_id):
     current_article = check_article(article_id)
     comments_to_this_article = current_article.comment_set.order_by('id')
