@@ -13,3 +13,4 @@ class Comment(models.Model):
     username = models.CharField('Author nickname', max_length = 50)
     text = models.TextField('Comment text', max_length = 350)
     avatar = models.ImageField(upload_to='images/')
+

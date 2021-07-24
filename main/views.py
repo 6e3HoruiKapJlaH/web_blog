@@ -25,39 +25,34 @@ def cut_to_500_symb(article_list):
 def leave_comment(request, article_id):
     context = {}
 
-    if request.method == 'POST':
+    if request.method == "POST":
 
         # create a form instance and populate it with data from the request:
         form = CommentForm(request.POST, request.FILES)
         # check whether it's valid:
         if form.is_valid():
+
+            obj = check_article(article_id)
+
             name = form.cleaned_data.get("nickname")
             text = form.cleaned_data.get("text")
             img = form.cleaned_data.get("avatar")
-            obj = Comment.objects.create(
-                username=name,
-                text=text,
-                avatar=img
-            )
+            obj.comment_set.create(
+                                 username = name,
+                                 text = text,
+                                 avatar = img
+                                 )
             obj.save()
             print(obj)
             see_more(request, article_id)
 
-        # username = request.POST['username']
-        # img = request.POST['avatar']
-        # text = request.POST['comment_text']
-        # obj = Comment.objects.create(
-        # text = text,
-        # username = username,
-        # avatar = img
-        # )
-        # obj.save()
 
     else:
         form = CommentForm()
     context['form'] = form
 
-    return render(request, "article.html", context)
+    return (see_more(request, article_id))
+
 
 
 def index(request):

@@ -20,9 +20,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #path('contacts/', include('contacts.urls') ),
 
     path('', include('main.urls'))
-
-]
-
-handler404 = 'main.views.error_404'
+    
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
