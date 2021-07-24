@@ -53,11 +53,39 @@
             <p>
                 <div class="block__content">{{article.text}} </div>
             </p>
+
+            <br>
             <br>
 
 
 
-            <h2>Comments to this article:</h2>
+
+                        
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <p>Enter username:</p>
+                    {{ form.nickname }}
+                </div>
+
+                <div>
+                    <p>Leave a comment:</p>
+                    {{ form.text }}
+                </div>
+
+                <div>
+                    <p>Select your avatar</p>
+                    {{ form.avatar }}
+
+                </div>
+                <br>
+
+                <div>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Cancel">
+                </div>
+            </form>
+            <!--<h2>Comments to this article:</h2>
         
             <form action="./leave_comment" method="post" enctype="multipart/form-data">
 
@@ -82,7 +110,7 @@
                     <button type="submit">Leave a comment</button>
                     <button type="reset">Cancel</button>
                 </div>
-            </form>
+            </form>-->
             
 
             <br>            
@@ -106,7 +134,7 @@
 
                         <p>
                             <div class="comment_text">
-                                Авата́р, авата́ра (просторечн. а́ва, авата́рк </div>
+                                Авата́р, авата́ра (просторечн. а́ва, авата́рк !
                             </div>
                         </p>
                     </div>
@@ -130,14 +158,14 @@
                 </section>
 
                 <aside>
-                    <div class="comment_right">
+                    <div class="comment_left">
                         <div class="username">
                             <h3>{{c.username}}</h3>
                         </div>
 
                         <p>
                             <div class="comment_text">
-                                {{c.text}} </div>
+                                {{c.text}} 
                             </div>
                         </p>
                     </div>
@@ -146,7 +174,9 @@
             </div>
             {% endfor %}
             {% else %}
-            No comments
+            <br>            
+            <br>
+            
             {% endif %}
 
 

@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 from .models import Article, Comment
+from .forms import CommentForm
 
 
 def check_article(article_id):
@@ -22,18 +23,33 @@ def cut_to_500_symb(article_list):
 
 
 def leave_comment(request, article_id):
-    try:
+    context = {}
+
+    '''try:
         current_aticle = Article.objects.get(id=article_id)
 
     except:
-        raise Http404("Статьи нет, полудурок")
+        raise Http404("Статьи нет, полудурок")'''
 
 
-    #if request.method == 'POST':
+    if request.method == 'POST':
+
         # create a form instance and populate it with data from the request:
-        #form = Comment(request.POST, request.FILES)
+        form = CommentForm(request.POST, request.FILES)
         # check whether it's valid:
-        #if form.is_valid():
+        if form.is_valid():
+            name = form.cleaned_data.get("nickname")
+            text = form.cleaned_data.get("text")
+            img = form.cleaned_data.get("avatar")
+            obj = Comment.objects.create(
+                                 username = name,
+                                 text = text,
+                                 avatar = img
+                                 )
+            obj.save()
+            print(obj)
+            see_more(request, article_id)
+
         #username = request.POST['username']
         #img = request.POST['avatar']
         #text = request.POST['comment_text']
@@ -44,19 +60,11 @@ def leave_comment(request, article_id):
                                  #)
         #obj.save()
 
-    current_aticle.comment_set.create(
-                username = request.POST['username'], 
-                text = request.POST['comment_text'],
-                avatar = request.POST['image'] )
-        #print(obj)
+    else:
+        form = CommentForm()
+    context['form']= form
 
-    see_more(request, article_id)
-
-    # if a GET (or any other method) we'll create a blank form
-    '''else:
-        form = Comment()
-
-    return render(request, 'article.html', {'form': form})'''
+    return render(request, "article.html", context)
 
 def index(request):
     articles_list = cut_to_500_symb( Article.objects.order_by('title')[:3])
@@ -100,11 +108,14 @@ def contacts(request):
 
 
 def see_more(request, article_id):
+
+
     current_aticle = check_article(article_id)
     comments_to_this_article = current_aticle.comment_set.order_by('id')
 
     articles_dict = dict([
          ('article', current_aticle),
+         ('form', CommentForm()),
          ('comments', comments_to_this_article)
          ])
     return (render(request, 'article.html', articles_dict))
