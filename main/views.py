@@ -16,7 +16,7 @@ def check_article(article_id):
         return current_article
 
     except:
-        #Вибрасываем ошибку если статья не найдена
+        #Выбрасываем ошибку если статья не найдена
         raise Http404("Статьи нет, полудурок")
 
 
@@ -108,12 +108,23 @@ def contacts(request):
 
 # Вывод одной статьи 
 def see_more(request, article_id):
+    #Получение текущей статьи
     current_article = check_article(article_id)
-    comments_to_this_article = current_article.comment_set.order_by('id')
 
+    # Создание списка комментариев по id 
+    comments_to_this_article = current_article.comment_set.order_by('id')
+ 
+    # Подготовка словаря для передачи на фронт
     articles_dict = dict([
+        #Данные текущей статьи
         ('article', current_article),
+
+        #Данные формы для оставления комментария
         ('form', CommentForm()),
+
+        #Данные комментариев к данной статье
         ('comments', comments_to_this_article)
     ])
+
+    #Рендеринг статьи с передачей словаря
     return render(request, 'article.html', articles_dict)

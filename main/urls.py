@@ -3,6 +3,7 @@ from . import views
 from django.conf import settings
 
 
+#Урлы, которые обслуживает сервер
 urlpatterns = [
     path('', views.index),
 
